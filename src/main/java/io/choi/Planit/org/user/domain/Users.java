@@ -2,11 +2,8 @@ package io.choi.Planit.org.user.domain;
 
 import java.time.LocalDateTime;
 
-import org.springframework.stereotype.Component;
-
 import lombok.Data;
 
-@Component
 @Data
 public class Users {
     private int user_id;
@@ -18,6 +15,8 @@ public class Users {
     private int pos_id;
     private int rank_id;
     private String password;
+    private LocalDateTime password_update_dt;
     private LocalDateTime create_dt;
     private LocalDateTime update_dt;
+    private String manager_f;
 }

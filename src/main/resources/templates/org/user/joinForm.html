@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
-    <link rel="stylesheet" rel="/css/user/join.css" />
+    <link rel="stylesheet" href="/css/user/join.css" />
 </head>
 <body>
     <main class="card">
@@ -21,9 +21,9 @@
         <div th:if="${param.success}" class="alert ok" role="alert">가입이 완료되었습니다. 로그인해 주세요.</div>
     
         <form th:action="@{/users/join}" method="post" novalidate>
-          <label for="username">아이디</label>
-          <input id="username" name="username" type="text" placeholder="your.id" autocomplete="username" required />
-    
+          <label for="username">이름</label>
+          <input id="username" name="name" type="text" placeholder="your.Name" autocomplete="username" autofocus  required />
+
           <div class="grid">
             <div>
               <label for="password">비밀번호</label>
@@ -31,34 +31,33 @@
             </div>
             <div>
               <label for="password2">비밀번호 확인</label>
-              <input id="password2" name="password2" type="password" placeholder="한번 더 입력" autocomplete="new-password" required />
+              <input id="password2"  type="password" placeholder="한번 더 입력" autocomplete="new-password" required />
             </div>
           </div>
     
           <div class="grid">
             <div>
-              <label for="name">이름</label>
-              <input id="name" name="name" type="text" placeholder="홍길동" required />
-            </div>
-            <div>
-              <label for="email">이메일</label>
-              <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" />
+              <label for="pos_id">직위</label>
+              <select id="pos_id" name="pos_id" required>
+                <option value="" disabled selected>직위을 선택하세요</option>
+                <option th:each="p : ${pos}" th:value="${p.pos_id}" th:text="${p.pos_ame}"></option>
+              </select>
             </div>
           </div>
     
           <div class="grid">
             <div>
-              <label for="deptId">부서</label>
-              <select id="deptId" name="deptId" required>
-                <option value="" disabled selected>부서를 선택하세요</option>
-                <option th:each="d : ${depts}" th:value="${d.deptId}" th:text="${d.deptName}">개발팀</option>
+              <label for="rank_id">직급</label>
+              <select id="rank_id" name="rank_id"  required>
+                <option value="" disabled selected>직급을 선택하세요</option>
+                <option th:each="r : ${ranks}" th:value="${r.rank_id}" th:text="${r.rank_name}"></option>
               </select>
             </div>
             <div>
-              <label for="rankId">직급</label>
-              <select id="rankId" name="rankId" required>
-                <option value="" disabled selected>직급을 선택하세요</option>
-                <option th:each="r : ${ranks}" th:value="${r.rankId}" th:text="${r.rankName}">사원</option>
+              <label for="dept_id">부서</label>
+              <select id="dept_id" name="dept_id"  required>
+                <option value="" disabled selected>부서를 선택하세요</option>
+                <option th:each="d : ${depts}" th:value="${d.dept_id}" th:text="${d.dept_name}"></option>
               </select>
             </div>
           </div>

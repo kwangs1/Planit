@@ -5,4 +5,5 @@ import io.choi.Planit.org.user.domain.Users;
 public interface UserService {
 
     void join(Users u);
+
 }

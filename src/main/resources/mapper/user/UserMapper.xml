@@ -14,4 +14,11 @@
             #{user_id}, #{name}, #{dept_id}, #{dept_name}, #{status}, #{pos_id}, #{rank_id}, #{password}, #{create_dt}, #{manager_f}
         )
     </insert>
+
+    <select id="findBySabun" parameterType="String" resultType="io.choi.Planit.org.user.domain.Users">
+        select * from users where sabun = #{sabun}
+    </select>   
+     <select id="findByName" parameterType="String" resultType="io.choi.Planit.org.user.domain.Users">
+        select * from users where name = #{name}
+    </select>
 </mapper>

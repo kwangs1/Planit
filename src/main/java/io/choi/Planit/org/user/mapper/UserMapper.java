@@ -8,4 +8,8 @@ import io.choi.Planit.org.user.domain.Users;
 public interface UserMapper {
 
     int join(Users u);
+
+    Users findBySabun(String sabun);
+    Users findByName(String name);
+    
 }

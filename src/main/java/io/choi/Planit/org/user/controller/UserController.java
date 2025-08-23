@@ -1,5 +1,6 @@
 package io.choi.Planit.org.user.controller;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,17 +25,6 @@ public class UserController {
     public String LoginForm() {
         return "/org/user/loginForm";
     }
-
-    @PostMapping("/login")
-    public void login(String sabun) {
-        
-    }
-    
-    @PostMapping("/logout")
-    public void logout() {
-
-    }
-    
     
     @GetMapping("/joinForm")
     public String joinForm() {

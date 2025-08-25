@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조직도</title>
+</head>
+<body>
+    <div th:each="item : ${deptList}">
+        <span th:text="${item.dept_name}"></span>
+    </div>
+</body>
+</html>

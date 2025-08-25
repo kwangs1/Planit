@@ -23,8 +23,8 @@ public class SecurityConfig{
                 .requestMatchers(
                     "/users/login", "/users/join", "/users/joinForm",
                     "/css/**", "/js/**", "/images/**"
-                ).permitAll()
-                .anyRequest().authenticated()
+                ).permitAll() //requestMatchers는 누구나 접근 가능
+                .anyRequest().authenticated() //그 외 url은 인증된 사용자만
             )
             .formLogin(form -> form
                 .loginPage("/users/loginForm")

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.choi.Planit.org.dept.mapper.DeptMapper">
+
+<select id="deptList" resultType="io.choi.Planit.org.dept.domain.Department">
+    select * from department
+</select>
+<insert id="write" parameterType="io.choi.Planit.org.dept.domain.Department">
+    <selectKey keyProperty="dept_id" resultType="int" order="BEFORE">
+        select seq_department.nextval from dual
+    </selectKey>
+    insert into department (dept_id, dept_name, par_id, depth, create_dt)
+    values(#{dept_id},#{dept_name},#{par_id},#{depth},#{create_dt})
+</insert>
+</mapper>

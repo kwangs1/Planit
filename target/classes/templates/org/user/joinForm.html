@@ -22,7 +22,7 @@
     
         <form th:action="@{/users/join}" method="post" novalidate>
           <label for="username">이름</label>
-          <input id="username" name="name" type="text" placeholder="your.Name" autocomplete="username" autofocus  required />
+          <input id="username" name="name" type="text" placeholder="name" autocomplete="username" autofocus  required />
 
           <div class="grid">
             <div>
@@ -37,27 +37,27 @@
     
           <div class="grid">
             <div>
-              <label for="pos_id">직위</label>
-              <select id="pos_id" name="pos_id" required>
+              <label for="posId">직위</label>
+              <select id="posId" name="posId" required>
                 <option value="" disabled selected>직위을 선택하세요</option>
-                <option th:each="p : ${pos}" th:value="${p.pos_id}" th:text="${p.pos_name}"></option>
+                <option th:each="p : ${pos}" th:value="${p.posId}" th:text="${p.posName}"></option>
               </select>
             </div>
           </div>
     
           <div class="grid">
             <div>
-              <label for="rank_id">직급</label>
-              <select id="rank_id" name="rank_id"  required>
+              <label for="rankId">직급</label>
+              <select id="rankId" name="rankId"  required>
                 <option value="" disabled selected>직급을 선택하세요</option>
-                <option th:each="r : ${ranks}" th:value="${r.rank_id}" th:text="${r.rank_name}"></option>
+                <option th:each="r : ${ranks}" th:value="${r.rankId}" th:text="${r.rankName}"></option>
               </select>
             </div>
             <div>
-              <label for="dept_id">부서</label>
-              <select id="dept_id" name="dept_id"  required>
+              <label for="deptId">부서</label>
+              <select id="deptId" name="deptId"  required>
                 <option value="" disabled selected>부서를 선택하세요</option>
-                <option th:each="d : ${depts}" th:value="${d.dept_id}" th:text="${d.dept_name}"></option>
+                <option th:each="d : ${depts}" th:value="${d.deptId}" th:text="${d.deptName}"></option>
               </select>
             </div>
           </div>

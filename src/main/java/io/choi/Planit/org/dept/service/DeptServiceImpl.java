@@ -23,13 +23,13 @@ public class DeptServiceImpl implements DeptService{
     @Override
     public int write(Department dept) {
         LocalDateTime now = LocalDateTime.now();
-        dept.setCreate_dt(now);
+        dept.setCreateDt(now);
 
-        if(dept.getDept_id() == 0){
+        if(dept.getDeptId() == 0){
             dept.setDepth(0);
-            dept.setPar_id(0);
+            dept.setParId(0);
         }else{
-            dept.setPar_id(dept.getDept_id());
+            dept.setParId(dept.getDeptId());
             dept.setDepth(dept.getDepth() + 1);
         }
         return deptMapper.write(dept);

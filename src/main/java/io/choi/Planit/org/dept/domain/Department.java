@@ -7,10 +7,10 @@ import lombok.Data;
 @Data
 public class Department {
 
-    private int dept_id;
-    private String dept_name;
-    private int par_id;
+    private int deptId;
+    private String deptName;
+    private int parId;
     private int depth;
-    LocalDateTime create_dt;
-    LocalDateTime update_dt;
+    LocalDateTime createDt;
+    LocalDateTime updateDt;
 }

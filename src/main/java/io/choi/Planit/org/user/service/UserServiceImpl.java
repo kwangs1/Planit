@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService{
     public void join(Users u){
         u.setStatus("1");
         LocalDateTime loc = LocalDateTime.now();
-        u.setCreate_dt(loc);
+        u.setCreateDt(loc);
         String encPassword = passwordEncoder.encode(u.getPassword());
         u.setPassword(encPassword);
         int result= mapper.join(u);

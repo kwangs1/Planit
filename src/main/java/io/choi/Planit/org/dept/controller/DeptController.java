@@ -27,9 +27,7 @@ public class DeptController {
     @GetMapping("/list")
     public String list(Model model) {
         List<Department> deptList = deptService.deptList();
-        for(Department d : deptList){
-            log.info("dept_name={}",d.getDept_name());
-        }
+
         model.addAttribute("deptList", deptList);
         return "/org/dept/list";
     }

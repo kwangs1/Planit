@@ -3,13 +3,31 @@
 <mapper namespace="io.choi.Planit.org.dept.mapper.DeptMapper">
 
 <select id="deptList" resultType="io.choi.Planit.org.dept.domain.Department">
-    select * from department
+    select * from department where status = '1'
 </select>
+
+<select id="info" resultType="io.choi.Planit.org.dept.domain.Department">
+    select * from department where dept_id = #{dept_id}
+</select>
+
 <insert id="write" parameterType="io.choi.Planit.org.dept.domain.Department">
-    <selectKey keyProperty="dept_id" resultType="int" order="BEFORE">
+    <selectKey keyProperty="deptId" resultType="int" order="BEFORE">
         select seq_department.nextval from dual
     </selectKey>
-    insert into department (dept_id, dept_name, par_id, depth, create_dt)
-    values(#{dept_id},#{dept_name},#{par_id},#{depth},#{create_dt})
+    insert into department (dept_id, dept_name, par_id, depth, create_dt, status)
+    values(#{deptId},#{deptName},#{parId},#{depth},#{createDt},#{status})
 </insert>
+
+<update id="update" parameterType="io.choi.Planit.org.dept.domain.Department">
+    update department
+        set dept_name = #{deptName}, par_id = #{parId}, depth = #{depth}, update_dt = #{updateDt}, status = #{status}
+    where dept_id = #{deptId}
+</update>
+
+<update id="delete" parameterType="int">
+    update department
+        set status = '4'
+    where dept_id = #{deptId}
+</update>
+
 </mapper>

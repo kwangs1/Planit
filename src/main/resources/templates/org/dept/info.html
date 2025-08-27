@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세 보기</title>
+</head>
+<body>
+    <button th:onclick="|location.href='@{/dept/writeForm(deptId=${dept.deptId})}'|">생성하기</button>
+    <button th:onclick="|location.href='@{/dept/updateForm(deptId=${dept.deptId})}'|">수정하기</button>
+    <button onclick="deleteDept()">삭제하기</button>
+    
+    <br>
+    <span th:text="${dept.deptName}"></span>
+
+    <input type="hidden" th:field="*{dept.deptId}">
+
+    <form id="deleteForm" th:action="@{/dept/delete}" th:method="post">
+        <input type="hidden" th:field="*{dept.deptId}"/>
+    </form>
+<script>
+function deleteDept() {
+    if(confirm("정말 삭제하시겠습니까?"))
+        document.getElementById("deleteForm").submit();
+}
+</script>
+</body>
+</html>

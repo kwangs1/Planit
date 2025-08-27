@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수정 폼</title>
+</head>
+<body>
+    <form th:action="@{/dept/update}" th:object="${dept}" method="post">
+       <input type="text" th:field="*{deptName}"/>
+
+       <input type="hidden" th:field="*{deptId}"/>
+       <input type="hidden" th:field="*{parId}"/>
+       <input type="hidden" th:field="*{depth}"/>
+       <input type="hidden" th:field="*{status}"/>
+
+       <button type="submit">수정</button>
+    </form>
+</body>
+</html>

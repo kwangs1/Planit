@@ -12,6 +12,10 @@ import io.choi.Planit.org.dept.domain.Department;
 import io.choi.Planit.org.dept.service.DeptService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
 
 
 
@@ -32,6 +36,13 @@ public class DeptController {
         return "/org/dept/list";
     }
     
+    @GetMapping("/info")
+    public String info(int deptId, Model model){
+        Department dept = deptService.info(deptId);
+        model.addAttribute("dept", dept);
+        return "/org/dept/info";
+    }
+
     @GetMapping("/writeForm")
     public String writeForm(Model model) {
         model.addAttribute("dept", new Department());
@@ -39,8 +50,29 @@ public class DeptController {
     }
     
     @PostMapping("/write")
-    public int write(Department dept) {
-        return deptService.write(dept);
+    public String write(Department dept) {
+        deptService.write(dept);
+        return "redirect:/dept/info?deptId="+dept.getDeptId();
     }
+
+    @GetMapping("/updateForm")
+    public String updateForm(int deptId, Model model) {
+        model.addAttribute("dept", deptService.info(deptId));
+        return "/org/dept/updateForm";
+    }
+    
+    @PostMapping("/update")
+    public String update(Department dept) {
+        deptService.update(dept);
+        return "redirect:/dept/info?deptId="+dept.getDeptId();
+    }
+
+    @PostMapping("/delete")
+    public String delete(int deptId) {
+        deptService.delete(deptId);
+        
+        return "redirect:/dept/list";
+    }
+    
     
 }

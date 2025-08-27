@@ -11,7 +11,7 @@
         insert into users (
             user_id, name, dept_id, dept_name, status, pos_id, rank_id, password, create_dt , manager_f
         ) values (
-            #{user_id}, #{name}, #{dept_id}, #{dept_name}, #{status}, #{pos_id}, #{rank_id}, #{password}, #{create_dt}, #{manager_f}
+            #{userId}, #{name}, #{deptId}, #{deptName}, #{status}, #{posId}, #{rankId}, #{password}, #{createDt}, #{managerF}
         )
     </insert>
 

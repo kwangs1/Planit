@@ -9,8 +9,7 @@
 <form th:action="@{/dept/write}"  th:object="${dept}" method="post">
         <input type="text" th:field="*{deptName}" placeholder="부서명" required/>
 
-        <input type="hidden" th:name="'parId'" th:value="${dept.deptId}" />
-        <input type="hidden" th:name="'depth'" th:value="${dept.depth}" />
+        <input type="hidden" th:name="'parId'" th:value="${param.deptId}" />
         <input type="submit" value="생성" />
 </form>
 </body>

@@ -13,4 +13,5 @@ public class Department {
     private int depth;
     LocalDateTime createDt;
     LocalDateTime updateDt;
+    private String status;
 }

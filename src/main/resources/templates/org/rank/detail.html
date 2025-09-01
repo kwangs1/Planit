@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세보기</title>
+</head>
+<body>
+    <form id="updateForm" th:action="@{/rank/update}" th:method="post">
+        <input type="text" name="rankName" th:value="${rank.rankName}" />
+        <input type="hidden" name="rankId" th:value="${rank.rankId}"/>
+        <br>
+        <input type="submit" value="수정" />
+    </form>
+    <form id="deleteForm" th:action="@{/rank/delete}" th:method="post">
+        <input type="hidden" name="rankId" th:value="${rank.rankId}"/>
+        <input type="button" onClick="deleteRank()" value="삭제" />
+    </form>
+
+<script>
+    function deleteRank(){
+        if(confirm("정말 삭제 하시겠습니까?")){
+            document.getElementById("deleteForm").submit();
+        }
+    }
+</script>
+</body>
+</html>

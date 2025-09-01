@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>직위 리스트</title>
+</head>
+<body>
+    <button onclick="writeForm()">작성</button>
+    <div th:each="item : ${posList}">
+        <a href="#" th:onclick="|detail(${item.posId})|" th:text="${item.posName}"></a>
+    </div>
+
+<script>
+    function writeForm(){
+        url = "/pos/writeForm";
+        window.open(url, "write", "width=300, height=300");
+    }
+    function detail(posId){
+        url = "/pos/detail?posId=" + posId;
+        window.open(url, "detail", "width=300, height=300");
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세보기</title>
+</head>
+<body>
+
+    <form id="updateForm" th:action="@{/pos/update}" th:method="post">
+        <input type="text" name="posName" th:value="${pos.posName}" />
+        <input type="hidden" name="posId" th:value="${pos.posId}" />
+        <br>
+        <button type="submit">수정</button>
+    </form>
+    <form id="deleteForm" th:action="@{/pos/delete}" th:method="post">
+        <input type="hidden" name="posId" th:value="${pos.posId}" />
+        <button type="button" onclick="deletePos()">삭제</button>
+    </form>
+
+<script>
+    function deletePos(){
+        if(confirm("정말 삭제하시겠습니까?")){
+            document.getElementById("deleteForm").submit();
+        }
+    }
+</script>
+</body>
+</html>

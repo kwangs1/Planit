@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>작성 폼</title>
+</head>
+<body>
+    <form id="writeForm" th:action="@{/rank/write}" th:method="post">
+        <input type="text" name="rankName" />
+        <input type="submit" value="생성하기" />
+    </form>
+</body>
+</html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인 화면</title>
-    <link rel="stylesheet" href="/css/user/login.css?v=1.0" />
+    <link rel="stylesheet" href="/css/user/login.css?v=2.0" />
 </head>
 <script src="/js/user/login.js"></script>
 <body>
@@ -34,7 +34,7 @@
               <input id="remember-me" name="remember-me" type="checkbox" />
               로그인 상태 유지
             </label>
-            <a class="links" href="#" aria-disabled="true" style="margin-left:auto;font-size:12px;">비밀번호 찾기</a>
+            <a class="links pwdReset" href="#" aria-disabled="true" style="margin-left:auto;font-size:12px;">비밀번호를 잊어버리셨나요?</a>
           </div>
     
           <!-- CSRF 
@@ -46,8 +46,81 @@
             <a th:href="@{/users/joinForm}">회원가입</a>
           </div>
         </form>
-    
+
+        
+          <!-- 모달 배경 + 모달 1 -->
+          <div id="modalBackdrop" class="modal-backdrop hidden">
+
+            <!-- 모달 1: 사용자 정보 확인 -->
+            <div id="findUserModal" class="modal-box hidden">
+                <h3 style="margin:0 0 10px 0;font-size:16px;">비밀번호 찾기</h3>
+
+                <input type="text" id="name" placeholder="이름">
+                <input type="text" id="sabun" placeholder="사번">
+
+                <button id="checkUserBtn" class="modal-btn">다음</button>
+                <p id="findUserError" style="color:red; display:none; font-size:12px;">일치하는 사용자가 없습니다.</p>
+                <button class="close-btn" onclick="closeModal()">닫기</button>
+            </div>
+
+            <!-- 모달 2: 비밀번호 재설정 -->
+            <div id="resetPasswordModal" class="modal-box hidden">
+              <form th:action="@{/users/passWordReset}" method="post" novalidate>
+                <h3 style="margin:0 0 10px 0;font-size:16px;">새 비밀번호 설정</h3>
+
+                <input type="password" name="password" id="newPw" placeholder="새 비밀번호">
+                <input type="password" id="newPw2" placeholder="비밀번호 확인">
+                
+                <!-- 유저 확인용 -->
+                <input type="hidden" name="name" id="hiddenName">
+                <input type="hidden" name="sabun" id="hiddenSabun">
+
+                <button type="submit" id="resetPwBtn" class="modal-btn">비밀번호 변경</button>
+                <button class="close-btn" onclick="closeModal()">닫기</button>
+              </form>
+            </div>
+          </div>
         <div class="footer">© <span th:text="${#dates.format(#dates.createNow(),'yyyy')}"></span> KSCompany</div>
 
+<script>
+  const backdrop = document.getElementById("modalBackdrop");
+  const modal1 = document.getElementById("findUserModal");
+  const modal2 = document.getElementById("resetPasswordModal");
+  
+  document.querySelector(".pwdReset").addEventListener("click", () => {
+      backdrop.classList.remove("hidden");
+      modal1.classList.remove("hidden");
+  });
+  
+  // 닫기 버튼
+  function closeModal() {
+    backdrop.classList.add("hidden");
+    modal1.classList.add("hidden");
+    modal2.classList.add("hidden");
+  }
+  
+  document.getElementById("checkUserBtn").addEventListener('click', async () => {
+    const name = document.getElementById("name").value.trim();
+    const sabun = document.getElementById("sabun").value.trim();
+  
+    const response = await fetch("/users/findByUsers", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({name: name, sabun: sabun})
+    });
+  
+    const data = await response.text();
+  
+    if (data === "success") {
+      modal1.classList.add("hidden");
+      modal2.classList.remove("hidden");
+      
+      document.getElementById("hiddenName").value = name;
+      document.getElementById("hiddenSabun").value = sabun;
+    } else {
+      document.getElementById("findUserError").style.display = "block";
+    }
+  });
+</script>
 </body>
 </html>

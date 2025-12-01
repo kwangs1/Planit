@@ -21,4 +21,12 @@
      <select id="findByName" parameterType="String" resultType="io.choi.Planit.org.user.domain.Users">
         select * from users where name = #{name}
     </select>
+
+    <select id="findByUsers" resultType="io.choi.Planit.org.user.domain.Users">
+        select * from users where name = #{name} and sabun = #{sabun}
+    </select>
+
+    <update id="passWordReset">
+        update users set password = #{password} where name = #{name} and sabun = #{sabun}
+    </update>
 </mapper>

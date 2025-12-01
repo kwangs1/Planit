@@ -27,6 +27,20 @@ public class UserServiceImpl implements UserService{
         u.setCreateDt(loc);
         String encPassword = passwordEncoder.encode(u.getPassword());
         u.setPassword(encPassword);
-        int result= mapper.join(u);
+        mapper.join(u);
     }
+
+    @Override
+    public Users findByUsers(String name, String sabun){
+        return mapper.findByUsers(name, sabun);
+    }
+    @Override
+    public void passWordReset(String name, String sabun, String password) {
+        String encPassword = passwordEncoder.encode(password);
+        int update = mapper.passWordReset(name, sabun, encPassword);
+        if (update == 0){
+            throw new RuntimeException("비밀번호 변경 대상이 없습니다.");
+        }
+    }
+    
 }

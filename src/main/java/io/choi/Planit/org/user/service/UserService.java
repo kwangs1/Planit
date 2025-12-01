@@ -6,4 +6,6 @@ public interface UserService {
 
     void join(Users u);
 
+    Users findByUsers(String name, String sabun);
+    void passWordReset(String name, String sabun, String password);
 }

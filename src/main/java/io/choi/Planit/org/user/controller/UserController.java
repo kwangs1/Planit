@@ -44,14 +44,13 @@ public class UserController {
     public ResponseEntity<String> findByUsers(@RequestBody Map<String, String>param){
         String name = param.get("name");
         String sabun = param.get("sabun");
-        Users user = service.findByUsers(name, sabun);
 
+        Users user = service.findByUsers(name, sabun);
         if (user != null){
             return ResponseEntity.ok("success");
         } else {
             return ResponseEntity.ok("fail");
         }
-        
     }
     @PostMapping("/passWordReset")
     public String passWordReset(String name, String sabun, String password){

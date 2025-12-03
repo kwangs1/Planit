@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planit</title>
 </head>
 <body>
+    <form th:action="@{/users/logout}" method="post">
+        <button type="submit">로그아웃</button>
+    </form>
+
     <a href="/dept/list">조직도</a>
     <a href="/pos/list">직위</a>
     <a href="/rank/list">직급</a>

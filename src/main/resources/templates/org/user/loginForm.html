@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인 화면</title>
-    <link rel="stylesheet" href="/css/user/login.css?v=2.0" />
+    <link rel="stylesheet" href="/css/login/login.css?v=2.0" />
+    <script src="/js/cookie-util.js"></script>
+    <script src="/js/login/findPswd.js"></script>
 </head>
-<script src="/js/user/login.js"></script>
-<body>
+<body onload="init()">
     <main class="card">
         <div class="brand">
           <div class="logo" aria-hidden="true"></div>
@@ -19,12 +20,11 @@
     
         <!-- 알림 -->
         <div th:if="${param.error}" class="alert" role="alert">아이디 또는 비밀번호를 확인해주세요.</div>
-        <div th:if="${param.logout}" class="alert ok" role="alert">안전하게 로그아웃되었습니다.</div>
-    
         <!-- 로그인 폼 -->
-        <form th:action="@{/users/login}" method="post" novalidate>
-          <label for="username">아이디</label>
-          <input id="username" name="username" type="text" placeholder="id" autocomplete="username" autofocus required />
+        <form th:action="@{/users/login}" method="post" id="loginForm" 
+          onsubmit="event.preventDefault(); handleLogin();" novalidate>
+          <label for="sabun">아이디</label>
+          <input id="loginId" name="sabun" type="text" placeholder="id" autocomplete="sabun" autofocus required />
     
           <label for="password">비밀번호</label>
           <input id="password" name="password" type="password" placeholder="••••••••" autocomplete="current-password" required />
@@ -34,6 +34,10 @@
               <input id="remember-me" name="remember-me" type="checkbox" />
               로그인 상태 유지
             </label>
+            <label class="saveId">
+              <input id="saveId" type="checkbox" />
+              아이디 저장
+            </label>           
             <a class="links pwdReset" href="#" aria-disabled="true" style="margin-left:auto;font-size:12px;">비밀번호를 잊어버리셨나요?</a>
           </div>
     
@@ -65,11 +69,13 @@
 
             <!-- 모달 2: 비밀번호 재설정 -->
             <div id="resetPasswordModal" class="modal-box hidden">
-              <form th:action="@{/users/passWordReset}" method="post" novalidate>
+              <form id="pwForm" th:action="@{/users/passWordReset}" method="post" novalidate>
                 <h3 style="margin:0 0 10px 0;font-size:16px;">새 비밀번호 설정</h3>
 
-                <input type="password" name="password" id="newPw" placeholder="새 비밀번호">
+                <input type="password" name="password" id="newPw" placeholder="새 비밀번호" autofocus>
                 <input type="password" id="newPw2" placeholder="비밀번호 확인">
+
+                <p id="pwError" style="color:red; display:none; font-size:12px; margin-top:8px;"></p>
                 
                 <!-- 유저 확인용 -->
                 <input type="hidden" name="name" id="hiddenName">
@@ -81,46 +87,26 @@
             </div>
           </div>
         <div class="footer">© <span th:text="${#dates.format(#dates.createNow(),'yyyy')}"></span> KSCompany</div>
-
 <script>
-  const backdrop = document.getElementById("modalBackdrop");
-  const modal1 = document.getElementById("findUserModal");
-  const modal2 = document.getElementById("resetPasswordModal");
-  
-  document.querySelector(".pwdReset").addEventListener("click", () => {
-      backdrop.classList.remove("hidden");
-      modal1.classList.remove("hidden");
-  });
-  
-  // 닫기 버튼
-  function closeModal() {
-    backdrop.classList.add("hidden");
-    modal1.classList.add("hidden");
-    modal2.classList.add("hidden");
-  }
-  
-  document.getElementById("checkUserBtn").addEventListener('click', async () => {
-    const name = document.getElementById("name").value.trim();
-    const sabun = document.getElementById("sabun").value.trim();
-  
-    const response = await fetch("/users/findByUsers", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({name: name, sabun: sabun})
-    });
-  
-    const data = await response.text();
-  
-    if (data === "success") {
-      modal1.classList.add("hidden");
-      modal2.classList.remove("hidden");
-      
-      document.getElementById("hiddenName").value = name;
-      document.getElementById("hiddenSabun").value = sabun;
-    } else {
-      document.getElementById("findUserError").style.display = "block";
+  function init(){
+    const saveId = getCookie("saveId");
+    if (saveId){
+      document.querySelector('#loginId').value = saveId;
+      document.querySelector('#saveId').checked = true;
     }
-  });
+  }
+
+  function handleLogin(){
+    const username = document.querySelector('#loginId').value;
+    const saveChecked = document.querySelector('#saveId').checked;
+
+    if (saveChecked){
+      setCookie("saveId", username, 30);
+    } else {
+      deleteCookie("saveId");
+    }
+    document.querySelector("#loginForm").submit();
+  }
 </script>
 </body>
 </html>

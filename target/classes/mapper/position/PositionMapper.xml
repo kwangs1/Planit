@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="io.choi.Planit.org.position.mapper.PositionMapper">
+<mapper namespace="io.choi.Planit.position.mapper.PositionMapper">
 
-<select id="list" resultType="io.choi.Planit.org.position.domain.Position">
+<select id="list" resultType="io.choi.Planit.position.domain.Position">
     select * from position
 </select>
 
-<select id="detail" resultType="io.choi.Planit.org.position.domain.Position">
+<select id="detail" resultType="io.choi.Planit.position.domain.Position">
     select * from position where pos_id = #{pos_id}
 </select>
-<insert id="write" parameterType="io.choi.Planit.org.position.domain.Position">
+<insert id="write" parameterType="io.choi.Planit.position.domain.Position">
     <selectKey keyProperty="posId" resultType="int" order="BEFORE">
         select seq_position.nextval from dual
     </selectKey>
@@ -17,7 +17,7 @@
     values(#{posId}, #{posName}, #{createDt})
 </insert>
 
-<update id="update" parameterType="io.choi.Planit.org.position.domain.Position">
+<update id="update" parameterType="io.choi.Planit.position.domain.Position">
     update position
     set pos_name = #{posName}
     where pos_id = #{posId}

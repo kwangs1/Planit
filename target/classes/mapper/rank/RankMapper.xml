@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="io.choi.Planit.org.rank.mapper.RankMapper">
+<mapper namespace="io.choi.Planit.rank.mapper.RankMapper">
 
-<select id="list" resultType="io.choi.Planit.org.rank.domain.Rank">
+<select id="list" resultType="io.choi.Planit.rank.domain.Rank">
     select * from job_rank
 </select>
 
-<select id="detail" resultType="io.choi.Planit.org.rank.domain.Rank">
+<select id="detail" resultType="io.choi.Planit.rank.domain.Rank">
     select * from job_rank where rank_id = #{rankId}
 </select>
 
-<insert id="write" parameterType="io.choi.Planit.org.rank.domain.Rank">
+<insert id="write" parameterType="io.choi.Planit.rank.domain.Rank">
     <selectKey keyProperty="rankId" resultType="int" order="BEFORE">
         select seq_rank.nextval from dual
     </selectKey>
@@ -18,7 +18,7 @@
     values(#{rankId}, #{rankName}, #{createDt})
 </insert>
 
-<update id="update" parameterType="io.choi.Planit.org.rank.domain.Rank">
+<update id="update" parameterType="io.choi.Planit.rank.domain.Rank">
     update job_rank
     set rank_name = #{rankName}
     where rank_id = #{rankId}

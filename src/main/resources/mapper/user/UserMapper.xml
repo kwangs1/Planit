@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="io.choi.Planit.org.user.mapper.UserMapper">
+<mapper namespace="io.choi.Planit.user.mapper.UserMapper">
 
-    <insert id="join" parameterType="io.choi.Planit.org.user.domain.Users">
+    <insert id="join" parameterType="io.choi.Planit.user.domain.Users">
         <selectKey keyProperty="user_id" resultType="int" order="BEFORE">
             select seq_users.nextval from dual
         </selectKey>        
@@ -15,11 +15,11 @@
         )
     </insert>
 
-    <select id="findBySabun" resultType="io.choi.Planit.org.user.domain.Users">
+    <select id="findBySabun" resultType="io.choi.Planit.user.domain.Users">
         select * from users where sabun = #{sabun}
     </select>   
 
-    <select id="findByUsers" resultType="io.choi.Planit.org.user.domain.Users">
+    <select id="findByUsers" resultType="io.choi.Planit.user.domain.Users">
         select * from users where name = #{name} and sabun = #{sabun}
     </select>
 
